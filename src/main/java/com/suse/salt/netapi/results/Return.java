@@ -1,5 +1,7 @@
 package com.suse.salt.netapi.results;
 
+import java.util.Optional;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -11,6 +13,13 @@ public class Return<T> {
 
     @SerializedName("return")
     private T result;
+
+    @SerializedName("retcode")
+    private Optional<Integer> retcode = Optional.empty();
+
+    public Optional<Integer> getRetcode() {
+        return this.retcode;
+    }
 
     /**
      * Returns the value of this result.

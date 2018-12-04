@@ -147,6 +147,22 @@ public class Jobs {
             });
         }
 
+        public <T> Optional<Return<T>> getReturn(String minionId, TypeToken<T> type) {
+            return Optional.ofNullable(result.get(minionId)).map(ret -> {
+                Type wrapperType = parameterizedType(null, Return.class, type.getType());
+                Return<T> r = GSON.fromJson(ret, wrapperType);
+                return r;
+            });
+        }
+
+        public <T> Optional<Return<T>> getReturn(String minionId, Class<T> type) {
+            return Optional.ofNullable(result.get(minionId)).map(ret -> {
+                Type wrapperType = parameterizedType(null, Return.class, type);
+                Return<T> r = GSON.fromJson(ret, wrapperType);
+                return r;
+            });
+        }
+
     }
 
     private Jobs() { }

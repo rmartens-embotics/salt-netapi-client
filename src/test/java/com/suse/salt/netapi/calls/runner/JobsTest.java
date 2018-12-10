@@ -69,9 +69,8 @@ public class JobsTest {
         assertEquals(Optional.empty(), result.error());
         Jobs.Info jobInfo = result.result().get();
         jobInfo.getMinions().forEach(
-            (minion) -> assertNotEquals(Optional.empty(), jobInfo.getReturn(minion, Object.class))
+                (minion) -> assertNotEquals(Optional.empty(), jobInfo.getReturn(minion, Object.class))
         );
-        
     }
 
     @Test

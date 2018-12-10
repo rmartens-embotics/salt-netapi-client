@@ -5,6 +5,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.any;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -66,7 +67,11 @@ public class JobsTest {
 
         assertTrue(result.result().isPresent());
         assertEquals(Optional.empty(), result.error());
-
+        Jobs.Info jobInfo = result.result().get();
+        jobInfo.getMinions().forEach(
+            (minion) -> assertNotEquals(Optional.empty(), jobInfo.getReturn(minion, Object.class))
+        );
+        
     }
 
     @Test
